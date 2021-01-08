@@ -1,10 +1,18 @@
 // Models
 const Sneaker = require('../models/sneakers');
+const dayjs = require('dayjs');
 
 exports.getAllSneakers = async (req, res) => {
     try {
+        const sneakers = await Sneaker.find({}).lean()
         res.status(200)
-            .send(await Sneaker.find({}));
+            .send(sneakers.map(sneaker => {
+                return {
+                    ...sneaker,
+                    sale_date: dayjs(sneaker.sale_date).format('YYYY-MM-DD'),
+                    purchase_date: dayjs(sneaker.purchase_date).format('YYYY-MM-DD')
+                }
+            }));
     } catch (error) {
         console.error(error);
         res.status(500).send(error);
@@ -57,6 +65,7 @@ exports.updateSneakers = async (req, res) => {
 }
 
 exports.deleteSneakers = async (req, res) => {
+    const _id = req.params.id;
     if (!_id) {
         res.status(400).send('No id found');
     } else {

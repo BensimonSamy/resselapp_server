@@ -13,7 +13,7 @@ module.exports = (app) => {
     app.get('/:id', sneakers.getSneakersById);
 
     // UPDATE SNEAKERS
-    app.patch('/:id', sneakers.updateSneakers);
+    app.put('/:id', sneakers.updateSneakers);
 
     // DELETE SNEAKERS
     app.delete('/:id', sneakers.deleteSneakers);
