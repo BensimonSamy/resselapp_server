@@ -1,8 +1,7 @@
-const { kStringMaxLength } = require('buffer');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const sneakers = new Schema({
+const Sneakers = new Schema({
     brand: {
         type: String,
         required: true
@@ -18,4 +17,4 @@ const sneakers = new Schema({
     purchase_date: Date
 });
 
-module.exports = mongoose.model('sneakers', sneakers);
+module.exports = mongoose.model('sneakers', Sneakers);

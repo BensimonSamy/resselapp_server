@@ -1,4 +1,3 @@
-// Models
 const Sneaker = require('../models/sneakers');
 const dayjs = require('dayjs');
 
@@ -9,8 +8,8 @@ exports.getAllSneakers = async (req, res) => {
             .send(sneakers.map(sneaker => {
                 return {
                     ...sneaker,
-                    sale_date: dayjs(sneaker.sale_date).format('YYYY-MM-DD'),
-                    purchase_date: dayjs(sneaker.purchase_date).format('YYYY-MM-DD')
+                    sale_date: sneaker.sale_date && dayjs(sneaker.sale_date).format('YYYY-MM-DD'),
+                    purchase_date: sneaker.purchase_date && dayjs(sneaker.purchase_date).format('YYYY-MM-DD')
                 }
             }));
     } catch (error) {
